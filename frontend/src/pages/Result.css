@@ -159,7 +159,11 @@
 .answer-section strong {
     display: block;
     margin-bottom: 0.5rem;
-    color: #555;
+    color: #333;
+}
+
+.answer-section {
+    color: #333;
 }
 
 .answer-section pre {
@@ -168,6 +172,7 @@
     border-radius: 8px;
     overflow-x: auto;
     font-family: 'Courier New', monospace;
+    color: #2c3e50;
 }
 
 .explanation {

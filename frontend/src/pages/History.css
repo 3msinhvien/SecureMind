@@ -32,6 +32,10 @@
     transition: background 0.3s;
 }
 
+.submission-row * {
+    color: #333;
+}
+
 .submission-row:hover {
     background: #f8f9fa;
 }

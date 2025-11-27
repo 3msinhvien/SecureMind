@@ -30,6 +30,10 @@
     transition: background 0.3s;
 }
 
+.leaderboard-row * {
+    color: #333;
+}
+
 .leaderboard-row:hover {
     background: #f8f9fa;
 }
