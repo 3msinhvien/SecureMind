@@ -19,10 +19,16 @@ const Dashboard = () => {
     }, [user]);
 
     const loadDashboard = async () => {
+        const userId = user?.id || user?._id;
+        if (!userId) {
+            setLoading(false);
+            return;
+        }
+        
         try {
             const [quizzesRes, submissionsRes, leaderboardRes] = await Promise.all([
                 quizAPI.getAll(),
-                submissionAPI.getUserSubmissions(user.id),
+                submissionAPI.getUserSubmissions(userId),
                 leaderboardAPI.getGlobal(5)
             ]);
 

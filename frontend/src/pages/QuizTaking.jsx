@@ -1,11 +1,13 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { quizAPI, submissionAPI } from '../api/api';
+import { AuthContext } from '../context/AuthContext';
 import './QuizTaking.css';
 
 const QuizTaking = () => {
     const { id } = useParams();
     const navigate = useNavigate();
+    const { loadUser } = useContext(AuthContext);
     const [quiz, setQuiz] = useState(null);
     const [answers, setAnswers] = useState({});
     const [startTime] = useState(new Date());
@@ -63,6 +65,8 @@ const QuizTaking = () => {
 
         try {
             const response = await submissionAPI.submit(submissionData);
+            // Reload user để cập nhật điểm
+            await loadUser();
             navigate(`/result/${response.data.data._id}`);
         } catch (error) {
             console.error('Submit error:', error);

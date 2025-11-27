@@ -83,8 +83,14 @@ router.post('/', protect, async (req, res) => {
         // Cập nhật điểm của user
         const user = await User.findById(req.user._id);
 
-        // Kiểm tra xem đã làm bài này chưa
-        if (!user.completedQuizzes.includes(quizId)) {
+        // Chỉ cộng điểm nếu chưa làm bài này trước đó
+        const existingSubmission = await Submission.findOne({
+            user: req.user._id,
+            quiz: quizId,
+            _id: { $ne: submission._id }
+        });
+
+        if (!existingSubmission) {
             user.completedQuizzes.push(quizId);
             user.totalScore += totalScore;
             await user.save();
